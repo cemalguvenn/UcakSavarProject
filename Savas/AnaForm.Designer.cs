@@ -30,10 +30,10 @@ namespace Savas
         private void InitializeComponent()
         {
             this.bilgiPanel = new System.Windows.Forms.Panel();
+            this.sureLabel = new System.Windows.Forms.Label();
+            this.bilgiLabel = new System.Windows.Forms.Label();
             this.ucakSavarPanel = new System.Windows.Forms.Panel();
             this.savasAlani = new System.Windows.Forms.Panel();
-            this.bilgiLabel = new System.Windows.Forms.Label();
-            this.sureLabel = new System.Windows.Forms.Label();
             this.bilgiPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -47,6 +47,30 @@ namespace Savas
             this.bilgiPanel.Name = "bilgiPanel";
             this.bilgiPanel.Size = new System.Drawing.Size(1004, 119);
             this.bilgiPanel.TabIndex = 0;
+            // 
+            // sureLabel
+            // 
+            this.sureLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.sureLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sureLabel.ForeColor = System.Drawing.Color.White;
+            this.sureLabel.Location = new System.Drawing.Point(776, 40);
+            this.sureLabel.Name = "sureLabel";
+            this.sureLabel.Size = new System.Drawing.Size(163, 55);
+            this.sureLabel.TabIndex = 1;
+            this.sureLabel.Text = "0:00";
+            this.sureLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // bilgiLabel
+            // 
+            this.bilgiLabel.AutoSize = true;
+            this.bilgiLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bilgiLabel.ForeColor = System.Drawing.Color.White;
+            this.bilgiLabel.Location = new System.Drawing.Point(20, 17);
+            this.bilgiLabel.Name = "bilgiLabel";
+            this.bilgiLabel.Size = new System.Drawing.Size(617, 78);
+            this.bilgiLabel.TabIndex = 0;
+            this.bilgiLabel.Text = "Oyunu başlatmak için ENTER tuşuna basın.\r\nUçaksavarı hareket ettirmek için SAĞ/SO" +
+    "L yön tuşlarına basın.\r\nAteş etmek için BOŞUL tuşuna basın.";
             // 
             // ucakSavarPanel
             // 
@@ -66,30 +90,6 @@ namespace Savas
             this.savasAlani.Size = new System.Drawing.Size(1004, 335);
             this.savasAlani.TabIndex = 2;
             // 
-            // bilgiLabel
-            // 
-            this.bilgiLabel.AutoSize = true;
-            this.bilgiLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bilgiLabel.ForeColor = System.Drawing.Color.White;
-            this.bilgiLabel.Location = new System.Drawing.Point(20, 17);
-            this.bilgiLabel.Name = "bilgiLabel";
-            this.bilgiLabel.Size = new System.Drawing.Size(617, 78);
-            this.bilgiLabel.TabIndex = 0;
-            this.bilgiLabel.Text = "Oyunu başlatmak için ENTER tuşuna basın.\r\nUçaksavarı hareket ettirmek için SAĞ/SO" +
-    "L yön tuşlarına basın.\r\nAteş etmek için BOŞUL tuşuna basın.";
-            // 
-            // sureLabel
-            // 
-            this.sureLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.sureLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sureLabel.ForeColor = System.Drawing.Color.White;
-            this.sureLabel.Location = new System.Drawing.Point(776, 40);
-            this.sureLabel.Name = "sureLabel";
-            this.sureLabel.Size = new System.Drawing.Size(163, 55);
-            this.sureLabel.TabIndex = 1;
-            this.sureLabel.Text = "0:00";
-            this.sureLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // AnaForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -100,6 +100,7 @@ namespace Savas
             this.Controls.Add(this.bilgiPanel);
             this.Name = "AnaForm";
             this.Text = "Savaş Oyunu";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.AnaForm_KeyDown);
             this.bilgiPanel.ResumeLayout(false);
             this.bilgiPanel.PerformLayout();
             this.ResumeLayout(false);
