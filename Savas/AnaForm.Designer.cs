@@ -29,6 +29,7 @@ namespace Savas
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AnaForm));
             this.bilgiPanel = new System.Windows.Forms.Panel();
             this.sureLabel = new System.Windows.Forms.Label();
             this.bilgiLabel = new System.Windows.Forms.Label();
@@ -76,9 +77,9 @@ namespace Savas
             // 
             this.ucakSavarPanel.BackColor = System.Drawing.Color.Teal;
             this.ucakSavarPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.ucakSavarPanel.Location = new System.Drawing.Point(0, 454);
+            this.ucakSavarPanel.Location = new System.Drawing.Point(0, 405);
             this.ucakSavarPanel.Name = "ucakSavarPanel";
-            this.ucakSavarPanel.Size = new System.Drawing.Size(1004, 61);
+            this.ucakSavarPanel.Size = new System.Drawing.Size(1004, 110);
             this.ucakSavarPanel.TabIndex = 1;
             // 
             // savasAlani
@@ -87,7 +88,7 @@ namespace Savas
             this.savasAlani.Dock = System.Windows.Forms.DockStyle.Fill;
             this.savasAlani.Location = new System.Drawing.Point(0, 119);
             this.savasAlani.Name = "savasAlani";
-            this.savasAlani.Size = new System.Drawing.Size(1004, 335);
+            this.savasAlani.Size = new System.Drawing.Size(1004, 286);
             this.savasAlani.TabIndex = 2;
             // 
             // AnaForm
@@ -98,6 +99,7 @@ namespace Savas
             this.Controls.Add(this.savasAlani);
             this.Controls.Add(this.ucakSavarPanel);
             this.Controls.Add(this.bilgiPanel);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AnaForm";
             this.Text = "Savaş Oyunu";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.AnaForm_KeyDown);
