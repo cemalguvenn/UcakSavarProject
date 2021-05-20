@@ -13,11 +13,13 @@ namespace SavasLibrary.Concrete
 
         private readonly Timer _gecenSureTimer = new Timer {Interval = 1000};
         private readonly Timer _hareketTimer = new Timer {Interval = 100};
+        private readonly Timer _ucakOlusturmaTimer = new Timer {Interval = 2000};
         private TimeSpan _gecenSure;
         private readonly Panel _ucakSavarPanel;
         private readonly Panel _savasAlani;
         private Ucaksavar _ucaksavar;
         private readonly List<Mermi> _mermiler = new List<Mermi>();
+        private readonly List<Ucak> _ucaklar = new List<Ucak>();
 
         #endregion
         #region Olaylar
@@ -49,6 +51,7 @@ namespace SavasLibrary.Concrete
             _savasAlani = savasAlaniPanel;
             _gecenSureTimer.Tick += GecenSureTimer_Tick;
             _hareketTimer.Tick += HareketTimer_Tick;
+            _ucakOlusturmaTimer.Tick += UcakOlusturmaTimer_Tick;
             
         }
 
@@ -60,6 +63,11 @@ namespace SavasLibrary.Concrete
         private void HareketTimer_Tick(object sender, EventArgs e)
         {
             MermileriHareketEttir();
+        }
+
+        private void UcakOlusturmaTimer_Tick(object sender, EventArgs e)
+        {
+            UcakOlustur();
         }
 
         private void MermileriHareketEttir()
@@ -82,14 +90,23 @@ namespace SavasLibrary.Concrete
             DevamEdiyorMu = true;
 
             UcaksavarOlustur();
+            UcakOlustur();
             ZamanlayicilariBaslat();
 
+        }
+
+        private void UcakOlustur()
+        {
+            var ucak = new Ucak(_savasAlani.Size);
+            _ucaklar.Add(ucak);
+            _savasAlani.Controls.Add(ucak);
         }
 
         private void ZamanlayicilariBaslat()
         {
             _hareketTimer.Start();
             _gecenSureTimer.Start();
+            _ucakOlusturmaTimer.Start();
         }
 
         private void UcaksavarOlustur()
@@ -112,6 +129,7 @@ namespace SavasLibrary.Concrete
         {
             _gecenSureTimer.Stop();
             _hareketTimer.Stop();
+            _ucakOlusturmaTimer.Stop();
         }
 
         public void AtesEt()
