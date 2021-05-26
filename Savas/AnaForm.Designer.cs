@@ -35,12 +35,14 @@ namespace Savas
             this.bilgiLabel = new System.Windows.Forms.Label();
             this.ucakSavarPanel = new System.Windows.Forms.Panel();
             this.savasAlani = new System.Windows.Forms.Panel();
+            this.puanLabel = new System.Windows.Forms.Label();
             this.bilgiPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // bilgiPanel
             // 
             this.bilgiPanel.BackColor = System.Drawing.Color.SteelBlue;
+            this.bilgiPanel.Controls.Add(this.puanLabel);
             this.bilgiPanel.Controls.Add(this.sureLabel);
             this.bilgiPanel.Controls.Add(this.bilgiLabel);
             this.bilgiPanel.Dock = System.Windows.Forms.DockStyle.Top;
@@ -54,7 +56,7 @@ namespace Savas
             this.sureLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.sureLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.sureLabel.ForeColor = System.Drawing.Color.White;
-            this.sureLabel.Location = new System.Drawing.Point(776, 40);
+            this.sureLabel.Location = new System.Drawing.Point(829, 40);
             this.sureLabel.Name = "sureLabel";
             this.sureLabel.Size = new System.Drawing.Size(163, 55);
             this.sureLabel.TabIndex = 1;
@@ -71,7 +73,7 @@ namespace Savas
             this.bilgiLabel.Size = new System.Drawing.Size(617, 78);
             this.bilgiLabel.TabIndex = 0;
             this.bilgiLabel.Text = "Oyunu başlatmak için ENTER tuşuna basın.\r\nUçaksavarı hareket ettirmek için SAĞ/SO" +
-    "L yön tuşlarına basın.\r\nAteş etmek için BOŞUL tuşuna basın.";
+    "L yön tuşlarına basın.\r\nAteş etmek için BOŞLUK tuşuna basın.";
             // 
             // ucakSavarPanel
             // 
@@ -90,6 +92,17 @@ namespace Savas
             this.savasAlani.Name = "savasAlani";
             this.savasAlani.Size = new System.Drawing.Size(1004, 286);
             this.savasAlani.TabIndex = 2;
+            // 
+            // puanLabel
+            // 
+            this.puanLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.puanLabel.ForeColor = System.Drawing.Color.Lime;
+            this.puanLabel.Location = new System.Drawing.Point(747, 56);
+            this.puanLabel.Name = "puanLabel";
+            this.puanLabel.Size = new System.Drawing.Size(100, 23);
+            this.puanLabel.TabIndex = 2;
+            this.puanLabel.Text = "0";
+            this.puanLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // AnaForm
             // 
@@ -116,6 +129,7 @@ namespace Savas
         private System.Windows.Forms.Label bilgiLabel;
         private System.Windows.Forms.Panel ucakSavarPanel;
         private System.Windows.Forms.Panel savasAlani;
+        private System.Windows.Forms.Label puanLabel;
     }
 }
 

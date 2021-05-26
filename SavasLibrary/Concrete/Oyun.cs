@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using SavasLibrary.Enum;
 using SavasLibrary.Interface;
@@ -17,9 +18,15 @@ namespace SavasLibrary.Concrete
         private TimeSpan _gecenSure;
         private readonly Panel _ucakSavarPanel;
         private readonly Panel _savasAlani;
+        private readonly Panel _bilgiPanel;
         private Ucaksavar _ucaksavar;
         private readonly List<Mermi> _mermiler = new List<Mermi>();
         private readonly List<Ucak> _ucaklar = new List<Ucak>();
+        private int _puan;
+        private int _kazanilacakPuan;
+        private string _zorlukSeviyesi;
+        private bool _duraklat;
+        private string _bilgiLabel;
 
         #endregion
         #region Olaylar
@@ -30,7 +37,11 @@ namespace SavasLibrary.Concrete
 
         #region Özellikler
 
-        public bool DevamEdiyorMu { get; private set; }
+        public bool DevamEdiyorMu
+        {
+            get => _duraklat;
+            set => _duraklat = value;
+        }
 
         public TimeSpan GecenSure
         {
@@ -42,29 +53,59 @@ namespace SavasLibrary.Concrete
             }
         }
 
+        public int Puan
+        {
+            get => _puan;
+            private set => _puan += value;
+        }
+        public string Seviye
+        {
+            get => _zorlukSeviyesi;
+            private set => _zorlukSeviyesi = value;
+        }
+
         #endregion
 
         #region Metotlar
-        public Oyun(Panel ucakSavarPanel, Panel savasAlaniPanel)
+        public Oyun(Panel ucakSavarPanel, Panel savasAlaniPanel, Panel bilgiPanel)
         {
             _ucakSavarPanel = ucakSavarPanel;
             _savasAlani = savasAlaniPanel;
+            _bilgiPanel = bilgiPanel;
             _gecenSureTimer.Tick += GecenSureTimer_Tick;
             _hareketTimer.Tick += HareketTimer_Tick;
             _ucakOlusturmaTimer.Tick += UcakOlusturmaTimer_Tick;
+            _kazanilacakPuan = 10;
             
         }
 
         private void GecenSureTimer_Tick(object sender, EventArgs e)
         {
+            if (!DevamEdiyorMu) return;
+
             GecenSure += TimeSpan.FromSeconds(1);
         }
 
         private void HareketTimer_Tick(object sender, EventArgs e)
         {
+            if (!DevamEdiyorMu) return;
+          
             MermileriHareketEttir();
             UcaklariHareketEttir();
             VurulanUcaklariCikar();
+        }
+
+        public void Duraklat()
+        {
+            if (DevamEdiyorMu == false)
+            {
+
+                DevamEdiyorMu = true;
+            }
+            else
+            {
+                DevamEdiyorMu = false;
+            }
         }
 
         private void VurulanUcaklariCikar()
@@ -79,7 +120,16 @@ namespace SavasLibrary.Concrete
                 _mermiler.Remove(vuranMermi);
                 _savasAlani.Controls.Remove(ucak);
                 _savasAlani.Controls.Remove(vuranMermi);
+
+                Puan = _kazanilacakPuan;
+                PuanArttir();
             }
+        }
+
+        private void PuanArttir()
+        {
+            var puanLabel = _bilgiPanel.Controls.Find("puanLabel", true).FirstOrDefault();
+            puanLabel.Text = Puan.ToString();
         }
 
         private void UcaklariHareketEttir()
@@ -96,6 +146,9 @@ namespace SavasLibrary.Concrete
 
         private void UcakOlusturmaTimer_Tick(object sender, EventArgs e)
         {
+            if (!DevamEdiyorMu) return;
+  
+
             UcakOlustur();
         }
 
@@ -118,9 +171,12 @@ namespace SavasLibrary.Concrete
             if (DevamEdiyorMu) return;
             DevamEdiyorMu = true;
 
+            var _bilgiLabel = _bilgiPanel.Controls.Find("bilgiLabel", true).FirstOrDefault();
+            _bilgiLabel.Text = "Duraklatmak ve Devam etmek için P'ye basınız.";
             UcaksavarOlustur();
             UcakOlustur();
             ZamanlayicilariBaslat();
+            
 
         }
 
@@ -173,6 +229,7 @@ namespace SavasLibrary.Concrete
         public void UcaksavariHareketEttir(Yon yon)
         {
             if (!DevamEdiyorMu) return;
+
             _ucaksavar.HareketEttir(yon);
         }
         #endregion

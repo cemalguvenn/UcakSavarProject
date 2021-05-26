@@ -16,7 +16,7 @@ namespace Savas
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new AnaForm());
+            Application.Run(new GirisEkranForm());
         }
     }
 }

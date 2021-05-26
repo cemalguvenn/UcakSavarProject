@@ -11,7 +11,7 @@ namespace Savas
         public AnaForm()
         {
             InitializeComponent();
-            _oyun = new Oyun(ucakSavarPanel, savasAlani);
+            _oyun = new Oyun(ucakSavarPanel, savasAlani, bilgiPanel);
             _oyun.GecenSureDegisti += Oyun_GecenSureDegisti;
         }
 
@@ -30,6 +30,9 @@ namespace Savas
                     break;
                 case Keys.Space:
                     _oyun.AtesEt();
+                    break;
+                case Keys.P:
+                    _oyun.Duraklat();
                     break;
             }
         }
