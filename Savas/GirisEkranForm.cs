@@ -36,5 +36,12 @@ namespace Savas
 
             
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            PuanListesi puanListesi = new PuanListesi();
+            this.Hide();
+            puanListesi.Show();
+        }
     }
 }

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Windows.Forms;
 using SavasLibrary.Enum;
 using SavasLibrary.Interface;
@@ -240,6 +242,64 @@ namespace SavasLibrary.Concrete
 
             DevamEdiyorMu = false;
             ZamanlayicilariDurdur();
+            SkorListesiGuncelle();
+      
+            
+        }
+
+        private void SkorListesiGuncelle()
+        {
+            string fileLocation = @"skor.txt";
+
+            if (!File.Exists(fileLocation))
+            {
+                FileStream fs = new FileStream(fileLocation, FileMode.OpenOrCreate, FileAccess.ReadWrite);
+                StreamWriter sw = new StreamWriter(fs);
+                sw.Write("0\n0\n0\n0\n0");
+                sw.Flush();
+                sw.Close();
+                fs.Close();
+            }
+
+            string[] skorlar = File.ReadAllLines(fileLocation, Encoding.UTF8);
+
+            List<int> yeniSkorlar = new List<int>();
+
+            for (int i = 0; i < 5; i++)
+            {
+                yeniSkorlar.Add(Convert.ToInt32(skorlar[i]));
+            }
+
+            yeniSkorlar.Sort();
+
+            for (int i = 0; i < 5; i++)
+            {
+                if (Puan > Convert.ToInt32(skorlar[i]))
+                {
+                    yeniSkorlar[0] = Puan;
+
+                    yeniSkorlar.Sort();
+
+                    String lastScores = yeniSkorlar[4].ToString() + "\n" +
+                                    yeniSkorlar[3].ToString() + "\n" +
+                                    yeniSkorlar[2].ToString() + "\n" +
+                                    yeniSkorlar[1].ToString() + "\n" +
+                                    yeniSkorlar[0].ToString() + "\n";
+
+
+                    File.WriteAllText(fileLocation, lastScores);
+
+                    break;
+                }
+            }
+
+            MessageBox.Show(yeniSkorlar[4].ToString() + "\n" +
+                  yeniSkorlar[3].ToString() + "\n" +
+                  yeniSkorlar[2].ToString() + "\n" +
+                  yeniSkorlar[1].ToString() + "\n" +
+                  yeniSkorlar[0].ToString() + "\n",
+                  "En İyi 5 Listesi");
+
         }
 
         private void ZamanlayicilariDurdur()
