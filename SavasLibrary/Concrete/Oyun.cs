@@ -64,14 +64,44 @@ namespace SavasLibrary.Concrete
             private set => _zorlukSeviyesi = value;
         }
 
+        public void ZorlukDegistir(int zorluk)
+        {
+            switch (zorluk)
+            {
+                case 2:
+                    _hareketTimer.Enabled = false;
+                    _hareketTimer.Interval = 20;
+                    _ucakOlusturmaTimer.Interval = 1500;
+                    _hareketTimer.Enabled = true;
+                    _kazanilacakPuan = 20;
+                    Seviye = "2";
+                    break;
+
+                case 3:
+                    _hareketTimer.Enabled = false;
+                    _hareketTimer.Interval = 15;
+                    _hareketTimer.Enabled = true;
+                    _ucakOlusturmaTimer.Enabled = false;
+                    _ucakOlusturmaTimer.Interval = 1500;
+                    _ucakOlusturmaTimer.Enabled = true;
+                    _kazanilacakPuan = 50;
+                    Seviye = "3";
+                    break;
+                default:
+                    break;
+            }
+        }
+
         #endregion
 
+
         #region Metotlar
-        public Oyun(Panel ucakSavarPanel, Panel savasAlaniPanel, Panel bilgiPanel)
+        public Oyun(Panel ucakSavarPanel, Panel savasAlaniPanel, Panel bilgiPanel, string zorlukSeviyesi)
         {
             _ucakSavarPanel = ucakSavarPanel;
             _savasAlani = savasAlaniPanel;
             _bilgiPanel = bilgiPanel;
+            _zorlukSeviyesi = zorlukSeviyesi;
             _gecenSureTimer.Tick += GecenSureTimer_Tick;
             _hareketTimer.Tick += HareketTimer_Tick;
             _ucakOlusturmaTimer.Tick += UcakOlusturmaTimer_Tick;
@@ -182,6 +212,8 @@ namespace SavasLibrary.Concrete
 
         private void UcakOlustur()
         {
+            if (!DevamEdiyorMu) return;
+  
             var ucak = new Ucak(_savasAlani.Size);
             _ucaklar.Add(ucak);
             _savasAlani.Controls.Add(ucak);
